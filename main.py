@@ -92,11 +92,11 @@ def task_j():
         plt.subplot(len(alpha_list), 1, idx+1)
 
         # Plot relativistic solution
-        plt.plot(np.linspace(0, 1, 201), P_bar_analytical(alpha, x=np.linspace(0, 1, 201), relative=False),
+        plt.plot(np.linspace(0, 1, 201), P_bar_analytical(alpha, x=np.linspace(0, 1, 201), relative=False),  # *4/alpha,
                  "r", label=r"Relativistic".format(alpha), alpha=0.5)
 
         # Plot newtonian solution
-        plt.plot(np.linspace(0, 1, 201), P_bar_newtonian(alpha, x=np.linspace(0, 1, 201), relative=False),
+        plt.plot(np.linspace(0, 1, 201), P_bar_newtonian(alpha, x=np.linspace(0, 1, 201), relative=False),  # *4/alpha,
                  "b", label=r"Newtonian".format(alpha), alpha=0.5)
 
         # Plotting config
@@ -114,7 +114,7 @@ def task_j():
 
 if __name__ == "__main__":
     # jacob()
-    task_g()
+    # task_g()
     # task_i()
     # task_j()
     pass
