@@ -107,7 +107,7 @@ def LE_analytical_n1(xi_array):
     return np.sin(xi_array)/xi_array
 
 
-def plot_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI_INIT, Euler=True):
+def plot_LE_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI_INIT, Euler=True):
     """Solve and plot the numerical solution of the Lane-Emden differential equation.
 
     Uses Euler or RK4 method"""
@@ -126,7 +126,7 @@ def plot_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI_IN
 
 
 def global_error(h, n, num_type):
-    """Find the global error of the function iteration."""
+    """Find the global error of the numerical approximation of the Lane-Emden equation."""
     assert num_type.lower() in ["rk4", "euler"], f"No valid numerical method given: {num_type}"
     assert n in [3/2, 3], f"n is not either 3/2 or 3, but {n}"
 
@@ -149,6 +149,8 @@ def global_error(h, n, num_type):
 
 def global_error_plot(show_plot=True, do_parallel=True):
     """Plot the global error of Euler and RK4 as a function of different h-values.
+
+    Solves the Lane-Emden equations and iterates a known number of steps before terminating and evaluating the error.
 
     :param show_plot: Whether to show the plot
     :param do_parallel: Whether to use multiprocessing (approx x2 speedup)
@@ -181,14 +183,12 @@ def global_error_plot(show_plot=True, do_parallel=True):
         res_array.reshape((len(method_list), len(n_list), len(h_list)))  # The array is indexed [method][n][h]
                        )
 
-    res_array = np.abs(res_array)
-
     # Plot the results
     if show_plot:
 
         plt.figure()
         plt.subplot(211)
-        plt.title(r"Error for $n=3/2$")
+        plt.title(r"Global error for $n=3/2$")
         plt.xlabel("step length h")
         plt.ylabel("Global error $e_N$")
 
@@ -198,7 +198,7 @@ def global_error_plot(show_plot=True, do_parallel=True):
         plt.legend()
 
         plt.subplot(212)
-        plt.title(r"Error for $n=3$")
+        plt.title(r"Global error for $n=3$ in ")
         plt.xlabel("step length h")
         plt.ylabel("Global error $e_N$")
 
@@ -249,6 +249,7 @@ if __name__ == "__main__":
     def test_single():
         global_error_plot(show_plot=False, do_parallel=False)
 
-    print("Testing the time taken to do one run of global_error_plot with multiprocessing vs. single process")
+    print("-" * 20 + "\n" +
+          "Testing the time taken to do one run of global_error_plot with multiprocessing vs. single process")
     print(f"Timed  multiprocessing: {timeit.timeit(test_multi, number=1): >5.1f} seconds")
     print(f"Timed singleprocessing: {timeit.timeit(test_single, number=1): >5.1f} seconds")
