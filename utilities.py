@@ -86,12 +86,23 @@ def numerical_general(h, y_init, f, *args, max_iterations=-1, end_condition=lamb
 
 
 def LE_diff_auto(y_array, n):
+    """Lane-Emden differential equation as an autonomous system of 1. order diff. equations.
+
+    :param y_array: The arguments as a (3,) np.array wit variables [theta, chi, xi].
+    :type y_array: np.ndarray
+    :param n: Parameter n in the Lane-Emden equations.
+    :type n: float
+    :return dy: Derivatives of y_array w.r.t xi.
+    :rtype: np.ndarray"""
     theta = max(y_array[0], 0)
-    dy = np.asarray([y_array[1], - theta ** n - 2*y_array[1]/y_array[2], 1])
+    dy = np.asarray([y_array[1],
+                     - theta ** n - 2*y_array[1]/y_array[2],
+                     1])
     return dy
 
 
 def LE_analytical_n1(xi_array):
+    """Analytical solution of Lane-Emden equation for n=1"""
     xi_array[0] = XI_INIT
     return np.sin(xi_array)/xi_array
 
@@ -215,12 +226,14 @@ def P_bar_deriv(y, alpha):
 
 
 def P_bar_analytical(alpha, x=np.linspace(0, 1, 101), relative=False):
+    """Relativistic analytical solution of TOV equations"""
     b = np.sqrt(1-alpha*x**2)
     c = np.sqrt(1-alpha)
     return (c - b)/(b - 3*c) / (1 if not relative else P_bar_analytical(alpha, 0, relative=False))
 
 
 def P_bar_newtonian(alpha, x=np.linspace(0, 1, 101), relative=False):
+    """Newtonian analytical solution of TOV equations."""
     return alpha * (1-x**2) / 4 / (1 if not relative else alpha/4)
 
 
