@@ -159,7 +159,7 @@ def global_error_plot(show_plot=True, do_parallel=True):
 
     method_list = ["Euler", "RK4"]
     n_list = np.array([3/2, 3])
-    h_list = np.logspace(-5, -1, 19)
+    h_list = np.logspace(-4, -1, 19)
 
     # Create an array of the different parameter combinations available using both methods, n's and all h's.
     # Results for each array is stored in res_array with the same index as in params

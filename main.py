@@ -23,11 +23,14 @@ def jacob():
 
 
 def task_d():
-    plt.figure(1)
+    plt.figure(4)
     plt.title("Numerical and and analytical solutions for n=1")
     xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, Euler=True)
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+    plt.grid()
     plt.legend(loc='upper right')
+    plt.xlim([0, None])
+    plt.ylim([0, 1.1])
 
     plt.show()
 
@@ -36,10 +39,18 @@ def task_e():
     plt.figure(2)
     plt.title("Numerical solution for n=3/2")
     plot_LE_numerical(n=3 / 2, Euler=True)
+    plt.grid()
+    plt.legend(loc='upper right')
+    plt.xlim([0, None])
+    plt.ylim([0, 1.1])
 
     plt.figure(3)
     plt.title("Numerical solution for n=3")
     plot_LE_numerical(n=3, Euler=True)
+    plt.grid()
+    plt.legend(loc='upper right')
+    plt.xlim([0, None])
+    plt.ylim([0, 1.1])
 
     plt.show()
 
@@ -49,7 +60,10 @@ def task_f():
     plt.title("Numerical and and analytical solutions for n=1 with RK4 method")
     xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, Euler=False)
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+    plt.grid()
     plt.legend(loc='upper right')
+    plt.xlim([0, None])
+    plt.ylim([0, 1.1])
 
     plt.show()
 
@@ -146,7 +160,7 @@ if __name__ == "__main__":
     # task_d()
     # task_e()
     # task_f()
-    task_g()
+    # task_g()
     # task_i()
     # task_j()
     pass
