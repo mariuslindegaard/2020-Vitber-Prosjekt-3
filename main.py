@@ -4,25 +4,55 @@ import matplotlib.pyplot as plt
 from utilities import *
 
 
+def task_d():
+    """Plot Lane-Emden"""
+    plt.figure(1)
+    plt.title("Numerical and and analytical solutions for n=1")
+    xi_list = plot_numerical(n=1, f=LE_diff_auto, Euler=True)
+    plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+    plt.legend(loc='upper right')
+
+    plt.show()
+
+
+def task_e():
+    plt.figure(2)
+    plt.title("Numerical solution for n=3/2")
+    plot_numerical(n=3/2, Euler=True)
+
+    plt.figure(3)
+    plt.title("Numerical solution for n=3")
+    plot_numerical(n=3, Euler=True)
+
+    plt.show()
+
+
+def task_f():
+    plt.figure(1)
+    plt.title("Numerical and and analytical solutions for n=1 with RK4 method")
+    xi_list = plot_numerical(n=1, f=LE_diff_auto, Euler=False)
+    plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+    plt.legend(loc='upper right')
+
+    plt.show()
+
+
 def jacob():
     plt.figure(1)
     plt.title("Numerical and and analytical solutions for n=1")
-    xi_list = plot_numerical(n=1, f=LE_diff_auto, Euler=False)
+    xi_list = plot_numerical(n=1, f=LE_diff_auto, Euler=True)
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
     plt.legend(loc='upper right')
 
     plt.figure(2)
     plt.title("Numerical solution for n=3/2")
-    plot_numerical(n=3/2, Euler=False)
+    plot_numerical(n=3/2, Euler=True)
 
     plt.figure(3)
     plt.title("Numerical solution for n=3")
-    plot_numerical(n=3, Euler=False)
+    plot_numerical(n=3, Euler=True)
 
     plt.show()
-
-
-
 
 
 def task_g():
@@ -113,7 +143,7 @@ def task_j():
 
 
 if __name__ == "__main__":
-    # jacob()
+    jacob()
     # task_g()
     # task_i()
     # task_j()

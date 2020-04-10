@@ -13,9 +13,9 @@ def step_Euler_auto(y, h, f, *args):
             y: Numerical approximation of y at time t
             h: Step size
             f: RHS of our ODE (RHS = Right hand side). Can be any function that only has y as a variable.
-            args: Additional arguments givien to the f-function
+            args: Additional arguments given to the f-function
         Returns:
-            next_y: Numerical approximation of y at time t+h
+            next_y: Numerical approximation of y at the next step
     """
     return y + h * f(y, *args)
 
@@ -108,6 +108,9 @@ def LE_analytical_n1(xi_array):
 
 
 def plot_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI_INIT, Euler=True):
+    """Solve and plot the numerical solution of the Lane-Emden differential equation.
+
+    Uses Euler or RK4 method"""
 
     y = numerical_general(h, np.array((theta_0, chi_0, start_xi)), f, n,
                           end_condition=lambda y_last: y_last[0] <= 0, Euler=Euler)
@@ -115,7 +118,7 @@ def plot_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI_IN
     # chi_list = y[:, 1]
     xi_list = y[:, 2]
 
-    plt.plot(xi_list, theta_list, linestyle='--', label="Numerical solution")
+    plt.plot(xi_list, theta_list, linestyle='--', label="Numerical solution: " + ("Euler" if Euler else "RK4"))
 
     print("For n =", n, ":  xi_1 =" , xi_list[-1])
 
@@ -154,7 +157,7 @@ def global_error_plot(show_plot=True, do_parallel=True):
 
     method_list = ["Euler", "RK4"]
     n_list = np.array([3/2, 3])
-    h_list = np.logspace(-4, -1, 17)
+    h_list = np.logspace(-5, -1, 19)
 
     # Create an array of the different parameter combinations available using both methods, n's and all h's.
     # Results for each array is stored in res_array with the same index as in params
