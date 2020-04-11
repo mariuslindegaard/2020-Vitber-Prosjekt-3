@@ -24,11 +24,16 @@ def jacob():
 
 def task_d():
     plt.figure(4)
-    plt.title("Numerical and and analytical solutions for n=1")
-    xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, Euler=True)
+    plt.title("Numerical and and analytical solutions\nof Lane-Emden where $n=1$")
+    for h in [3E-1, 1E-1, 1E-2, 1E-3]:
+        xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, h=h, Euler=True)
+
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+
+    plt.xlabel(r"\xi")
+    plt.ylabel(r"\theta")
     plt.grid()
-    plt.legend(loc='upper right')
+    plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
 
@@ -37,18 +42,24 @@ def task_d():
 
 def task_e():
     plt.figure(2)
-    plt.title("Numerical solution for n=3/2")
-    plot_LE_numerical(n=3 / 2, Euler=True)
+    plt.title("Numerical solution for Lane-Emden where $n=3/2$")
+    plot_LE_numerical(n=3 / 2, f=LE_diff_auto, h=1E-3, Euler=True)
+
+    plt.xlabel(r"\xi")
+    plt.ylabel(r"\theta")
     plt.grid()
-    plt.legend(loc='upper right')
+    plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
 
     plt.figure(3)
-    plt.title("Numerical solution for n=3")
-    plot_LE_numerical(n=3, Euler=True)
+    plt.title("Numerical solution for Lane-Emden where $n=3$")
+    plot_LE_numerical(n=3, f=LE_diff_auto, h=1E-3, Euler=True)
+
+    plt.xlabel(r"\xi")
+    plt.ylabel(r"\theta")
     plt.grid()
-    plt.legend(loc='upper right')
+    plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
 
@@ -57,11 +68,17 @@ def task_e():
 
 def task_f():
     plt.figure(1)
-    plt.title("Numerical and and analytical solutions for n=1 with RK4 method")
-    xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, Euler=False)
+    plt.title("Numerical and and analytical solutions\nof Lane-Emden where $n=1$ with RK4 method")
+
+    for h in [3E-1, 1E-1, 1E-2, 1E-3]:
+        xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, h=h, Euler=False)
+
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
+
+    plt.xlabel(r"\xi")
+    plt.ylabel(r"\theta")
     plt.grid()
-    plt.legend(loc='upper right')
+    plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
 
@@ -72,8 +89,9 @@ def task_g():
     global_error_plot()
 
 
-def task_i():
-    h = 1E-4  # This value gives RK4 a very small global error, a lot smaller than e.g. h=3E-4
+def task_i(h=None):
+    if h is None:
+        h = 1E-4  # This value gives RK4 a very small global error, a lot smaller than e.g. h=3E-4
     alpha_list = np.array((0.86, 0.59, 0.0167))
 
     plt.figure(figsize=(6, 8))
@@ -157,9 +175,9 @@ def task_j():
 
 if __name__ == "__main__":
     # jacob()
-    # task_d()
-    # task_e()
-    # task_f()
+    task_d()
+    task_e()
+    task_f()
     # task_g()
     # task_i()
     # task_j()

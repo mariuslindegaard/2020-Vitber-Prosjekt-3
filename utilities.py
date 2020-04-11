@@ -118,9 +118,9 @@ def plot_LE_numerical(n, f=LE_diff_auto, h=1E-2, theta_0=1, chi_0=0, start_xi=XI
     # chi_list = y[:, 1]
     xi_list = y[:, 2]
 
-    plt.plot(xi_list, theta_list, linestyle='--', label="Numerical solution: " + ("Euler" if Euler else "RK4"))
+    plt.plot(xi_list, theta_list, linestyle='--', label="Numerical solution: " + ("Euler" if Euler else "RK4") + f" with $h={h:G}$")
 
-    print("For n =", n, ":  xi_1 =" , xi_list[-1])
+    print(("Euler" if Euler else "RK4") + f" with h={h:.0E} and n = {n}" + ":  xi_1 = ", xi_list[-1])
 
     return xi_list
 
@@ -131,9 +131,11 @@ def global_error(h, n, num_type):
     assert n in [3/2, 3], f"n is not either 3/2 or 3, but {n}"
 
     if n == 3/2:
-        xi_final = 3.6537537362191657  # 3.65375
-    else:
-        xi_final = 6.89684861937482  # 6.89685
+        xi_final = 3.6537537362191657  # Calculated with RK4 and h=1E-7, rounded to the 15th decimal place.
+        # 3.65375 was given in the manual
+    elif n == 3:
+        xi_final = 6.89684861937482  # Calculated with RK4 and h=1E-7, rounded to the 13th decimal place.
+        # 6.89685 was given in the manual
 
     y_init = np.array((1, 0, XI_INIT))
     y_array = numerical_general(h, y_init, LE_diff_auto, n,
