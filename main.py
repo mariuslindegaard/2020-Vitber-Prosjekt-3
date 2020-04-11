@@ -4,38 +4,22 @@ import matplotlib.pyplot as plt
 from utilities import *
 
 
-def jacob():
-    plt.figure(1)
-    plt.title("Numerical and and analytical solutions for n=1")
-    xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, Euler=True)
-    plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
-    plt.legend(loc='upper right')
-
-    plt.figure(2)
-    plt.title("Numerical solution for n=3/2")
-    plot_LE_numerical(n=3 / 2, Euler=True)
-
-    plt.figure(3)
-    plt.title("Numerical solution for n=3")
-    plot_LE_numerical(n=3, Euler=True)
-
-    plt.show()
-
-
 def task_d():
     plt.figure(4)
-    plt.title("Numerical and and analytical solutions\nof Lane-Emden where $n=1$")
-    for h in [3E-1, 1E-1, 1E-2, 1E-3]:
+    plt.title("Numerical and and analytical solutions\nof Lane-Emden where $n=1$ with forwards Euler method")
+    for h in [3E-1, 1E-1, 1E-2]:
         xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, h=h, Euler=True)
 
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
 
-    plt.xlabel(r"\xi")
-    plt.ylabel(r"\theta")
+    plt.xlabel(r"$\xi$")
+    plt.ylabel(r"$\theta$")
     plt.grid()
     plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
+
+    plt.savefig("Plots\\Task_d.pdf")
 
     plt.show()
 
@@ -43,25 +27,29 @@ def task_d():
 def task_e():
     plt.figure(2)
     plt.title("Numerical solution for Lane-Emden where $n=3/2$")
-    plot_LE_numerical(n=3 / 2, f=LE_diff_auto, h=1E-3, Euler=True)
+    plot_LE_numerical(n=3/2, f=LE_diff_auto, h=1E-3, Euler=True)
 
-    plt.xlabel(r"\xi")
-    plt.ylabel(r"\theta")
+    plt.xlabel(r"$\xi$")
+    plt.ylabel(r"$\theta$")
     plt.grid()
     plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
+
+    plt.savefig("Plots\\Task_e_1.pdf")
 
     plt.figure(3)
     plt.title("Numerical solution for Lane-Emden where $n=3$")
     plot_LE_numerical(n=3, f=LE_diff_auto, h=1E-3, Euler=True)
 
-    plt.xlabel(r"\xi")
-    plt.ylabel(r"\theta")
+    plt.xlabel(r"$\xi$")
+    plt.ylabel(r"$\theta$")
     plt.grid()
     plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
+
+    plt.savefig("Plots\\Task_e_2.pdf")
 
     plt.show()
 
@@ -70,17 +58,19 @@ def task_f():
     plt.figure(1)
     plt.title("Numerical and and analytical solutions\nof Lane-Emden where $n=1$ with RK4 method")
 
-    for h in [3E-1, 1E-1, 1E-2, 1E-3]:
+    for h in [3E-1, 1E-1, 1E-2]:
         xi_list = plot_LE_numerical(n=1, f=LE_diff_auto, h=h, Euler=False)
 
     plt.plot(xi_list, LE_analytical_n1(xi_list), linestyle="dotted", label="Analytical solution")
 
-    plt.xlabel(r"\xi")
-    plt.ylabel(r"\theta")
+    plt.xlabel(r"$\xi$")
+    plt.ylabel(r"$\theta$")
     plt.grid()
     plt.legend(loc='lower left')
     plt.xlim([0, None])
     plt.ylim([0, 1.1])
+
+    plt.savefig("Plots\\Task_f.pdf")
 
     plt.show()
 
@@ -140,6 +130,8 @@ def task_i(h=None):
         plt.legend()
 
     plt.tight_layout()
+
+    plt.savefig(f"Plots\\Task_i_h={h:.0E}.pdf")
     plt.show()
 
 
@@ -170,20 +162,15 @@ def task_j():
         plt.legend()
 
     plt.tight_layout()
+    plt.savefig(f"Plots\\Task_j_unscaled.pdf")
     plt.show()
 
 
 if __name__ == "__main__":
-    # jacob()
-    task_d()
-    task_e()
-    task_f()
+    # task_d()
+    # task_e()
+    # task_f()
     # task_g()
-    # task_i()
+    # task_i(h=1E-4)
     # task_j()
     pass
-
-
-
-
-
