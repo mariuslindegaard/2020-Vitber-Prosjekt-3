@@ -159,7 +159,7 @@ def global_error_plot(show_plot=True, do_parallel=True):
     :return: None
     """
 
-    h_min_power = -6
+    h_min_power = -4
 
     method_list = ["Euler", "RK4"]
     n_list = np.array([3/2, 3])
